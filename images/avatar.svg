@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+  <circle cx="110" cy="110" r="110" fill="#2d5d8f"/>
+  <circle cx="110" cy="88" r="42" fill="#e8eef5"/>
+  <path d="M40 200c8-46 40-70 70-70s62 24 70 70z" fill="#e8eef5"/>
+  <text x="110" y="128" font-family="Verdana, Arial, sans-serif" font-size="1" fill="none">SC</text>
+</svg>
