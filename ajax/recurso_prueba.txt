@@ -1,0 +1,6 @@
+Este es un archivo de prueba para el ejercicio de AJAX.
+Si ves este texto dentro del recuadro "Contenidos del archivo",
+la petición AJAX funcionó correctamente.
+
+Podés probar también con ejercicio_ajax.html como URL,
+para ver cómo trae su propio código fuente.

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="ajax.css">
+
+
+<title>Ejercicio de AJAX</title>
+</head>
+
+<body>
+
+	<h1>Ejercicio de AJAX</h1>
+
+<form action="#">
+    <label>URL:</label>
+    <input type="text" id="recurso" size="70" />
+    <input type="button" id="enviar" value="Mostrar contenidos" />
+  </form>
+
+  <div id="principal">
+    <h2>Contenidos del archivo:</h2>
+    <div id="contenidos"></div>
+
+    <h2>Cabeceras HTTP de la respuesta del servidor:</h2>
+    <div id="cabeceras"></div>
+  </div>
+
+  <div id="secundario">
+    <h2>Estados de la petición:</h2>
+    <div id="estados"></div>
+
+    <h2>Código de estado:</h2>
+    <div id="codigo"></div>
+  </div>
+
+  <script type="text/javascript">
+    // ---------------------------------------------------------------
+    // Ejercicio de AJAX
+    // Crea la petición, muestra en todo momento el estado en el que
+    // se encuentra, y al finalizar completa los 4 campos pedidos:
+    // contenidos, estados, código de estado y cabeceras HTTP.
+    // ---------------------------------------------------------------
+
+    // Crea un objeto XMLHttpRequest compatible con distintos navegadores
+    // (incluye el método antiguo de Internet Explorer con ActiveX, tal
+    // como se enseña en la técnica AJAX clásica).
+    function crearXHR() {
+      var xhrObj = null;
+
+      if (window.XMLHttpRequest) {
+        // Navegadores actuales (Chrome, Firefox, Edge, Safari, IE7+)
+        xhrObj = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        // Versiones muy antiguas de Internet Explorer
+        try {
+          xhrObj = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (error) {
+          try {
+            xhrObj = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (error2) {
+            xhrObj = null;
+          }
+        }
+      }
+
+      return xhrObj;
+    }
+
+    // Texto descriptivo de cada valor posible de xhr.readyState
+    var textoEstados = {
+      0: "0 - UNSENT (petición no inicializada)",
+      1: "1 - OPENED (conexión establecida con el servidor)",
+      2: "2 - HEADERS_RECEIVED (cabeceras de la respuesta recibidas)",
+      3: "3 - LOADING (descargando la respuesta)",
+      4: "4 - DONE (petición finalizada)"
+    };
+
+    var xhr = null;
+
+    // Limpia los 4 campos antes de lanzar una nueva petición
+    function limpiarCampos() {
+      document.getElementById("contenidos").innerHTML = "";
+      document.getElementById("estados").innerHTML = "";
+      document.getElementById("cabeceras").innerHTML = "";
+      document.getElementById("codigo").innerHTML = "";
+    }
+
+    // Convierte el texto recibido del servidor a texto plano seguro,
+    // para que se vea como código fuente y no se interprete como HTML
+    // (el CSS ya se encarga de mostrarlo con white-space: pre).
+    function escaparHtml(texto) {
+      var contenedorTemporal = document.createElement("div");
+      contenedorTemporal.appendChild(document.createTextNode(texto));
+      return contenedorTemporal.innerHTML;
+    }
+
+    // Se ejecuta cada vez que cambia xhr.readyState
+    function mostrarEstadoPeticion() {
+      var estadoActual = textoEstados[xhr.readyState];
+      if (estadoActual === undefined) {
+        estadoActual = String(xhr.readyState);
+      }
+
+      // "Se debe mostrar en todo momento el estado" -> se va agregando
+      // cada cambio de estado, no se pisa el anterior.
+      document.getElementById("estados").innerHTML += estadoActual + "\n";
+
+      // readyState 4 = DONE: la petición terminó y ya hay respuesta
+      if (xhr.readyState === 4) {
+
+        if (xhr.status === 0) {
+          // status 0 = no llegó a haber respuesta del servidor (recurso
+          // bloqueado por CORS, servidor caído, URL inválida, etc.)
+          document.getElementById("contenidos").innerHTML = "No se pudo contactar al servidor. Revisá la URL.";
+          document.getElementById("codigo").innerHTML = "Sin respuesta del servidor";
+        } else {
+          // Se muestran contenido y cabeceras para CUALQUIER respuesta del
+          // servidor, sea 200 OK, 404 Not Found, 500, etc. (el servidor sí
+          // respondió, solo que con un código distinto de éxito).
+          document.getElementById("contenidos").innerHTML = escaparHtml(xhr.responseText);
+          document.getElementById("cabeceras").innerHTML = escaparHtml(xhr.getAllResponseHeaders());
+          document.getElementById("codigo").innerHTML = xhr.status + " " + xhr.statusText;
+        }
+      }
+    }
+
+    // Se ejecuta al hacer click en el botón "Mostrar contenidos" (o al
+    // presionar Enter en el campo de texto, ver más abajo)
+    function pedirRecurso() {
+      var url = document.getElementById("recurso").value;
+
+      if (!url) {
+        alert("Ingresá una URL antes de continuar.");
+        return;
+      }
+
+      limpiarCampos();
+
+      xhr = crearXHR();
+
+      if (!xhr) {
+        alert("Tu navegador no soporta AJAX (XMLHttpRequest).");
+        return;
+      }
+
+      // Se agrega un parámetro aleatorio para evitar que el navegador
+      // devuelva una copia en caché en vez de pedirla de nuevo al servidor.
+      var urlSinCache = url + (url.indexOf("?") === -1 ? "?" : "&") + "_=" + new Date().getTime();
+
+      xhr.onreadystatechange = mostrarEstadoPeticion;
+
+      try {
+        xhr.open("GET", urlSinCache, true);
+        xhr.send(null);
+      } catch (error) {
+        document.getElementById("contenidos").innerHTML = "Error al realizar la petición: " + error.message;
+      }
+    }
+
+    // Al cargar la página, se precarga el campo URL con la dirección de la
+    // propia página, para que se pueda probar el ejercicio con un solo click.
+    window.onload = function () {
+      document.getElementById("recurso").value = window.location.href;
+    };
+
+    document.getElementById("enviar").onclick = pedirRecurso;
+
+    // Enter dentro del campo de texto también dispara la petición
+    document.querySelector("form").onsubmit = function () {
+      pedirRecurso();
+      return false;
+    };
+  </script>
+
+</body>
+</html>
