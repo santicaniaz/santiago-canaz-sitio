@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Santiago Cañaz - Contacto</title>
+  <meta name="description" content="Datos de contacto y formulario de contacto de Santiago Cañaz." />
+  <meta name="author" content="Santiago Cañaz" />
+  <link rel="icon" type="image/svg+xml" href="images/avatar.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+</head>
+
+<body>
+
+  <div id="contenedor">
+
+    <div id="cabecera">
+      <h1>Santiago Cañaz</h1>
+      <p class="subtitulo">Analista en Sistemas | Estudiante de Licenciatura en Sistemas</p>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li><a href="hobbies.html">Hobbies</a></li>
+        <li><a class="activo" href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div id="contenido">
+
+      <h2>Contacto</h2>
+      <p>Podés contactarme por cualquiera de estos medios, o completar el formulario:</p>
+
+      <ul class="datos-contacto">
+        <li><strong>Email:</strong> <a href="mailto:santicaniaz@gmail.com">santicaniaz@gmail.com</a></li>
+        <li><strong>Teléfono:</strong> (54) 11 2301-0402</li>
+        <li><strong>Ubicación:</strong> Argentina, C.A.B.A.</li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/santiagocaniaz/" title="Perfil de LinkedIn de Santiago Cañaz" target="_blank" rel="noopener">linkedin.com/in/santiagocaniaz</a></li>
+      </ul>
+
+      <h3>Formulario de contacto</h3>
+      <p>
+        <em>Nota:</em> este formulario usa <code>action="mailto:"</code>, por lo que al enviarlo se
+        abrirá el cliente de correo predeterminado con los datos cargados. Para que un formulario
+        envíe los datos directamente sin abrir el correo, se necesita un programa del lado del
+        servidor (por ejemplo en PHP) que procese el envío.
+      </p>
+
+      <form action="mailto:santicaniaz@gmail.com" method="post" enctype="text/plain">
+
+        <fieldset>
+          <legend>Enviame un mensaje</legend>
+
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" size="40" maxlength="60" />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" size="40" maxlength="60" />
+
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="6" cols="40">Escribí tu mensaje aquí...</textarea>
+
+          <input type="submit" name="enviar" value="Enviar mensaje" />
+          <input type="reset" name="limpiar" value="Borrar datos" />
+        </fieldset>
+
+      </form>
+
+    </div>
+
+    <div id="pie">
+      <p>&copy; 2026 Santiago Cañaz. Sitio desarrollado con HTML y CSS.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
