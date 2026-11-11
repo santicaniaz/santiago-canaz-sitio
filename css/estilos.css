@@ -384,7 +384,7 @@ textarea:focus {
   border-color: #3730a3;
 }
 
-input.boton-form {
+button.boton-form {
   margin-top: 1.1em;
   margin-right: 0.6em;
   padding: 0.75em 1.6em;
@@ -395,19 +395,19 @@ input.boton-form {
   cursor: pointer;
 }
 
-input.enviar {
+button.enviar {
   color: #ffffff;
   background-color: #3730a3;
   border: 0.0625em solid #3730a3;
 }
 
-input.borrar {
+button.borrar {
   color: #374151;
   background-color: #ffffff;
   border: 0.0625em solid #8a94a6;
 }
 
-input.boton-form:focus {
+button.boton-form:focus {
   outline: 0.19em solid #b45309;
   outline-offset: 0.12em;
 }
