@@ -1,13 +1,5 @@
-/* =======================================================
-   Sitio web personal - Santiago Cañaz
-   Hoja de estilos externa (CSS)
-   Versión accesible (WCAG 1.0 nivel AA):
-   - Todas las medidas en unidades relativas (em y %), punto 3.4
-   - Colores sólidos con contraste suficiente, punto 2.2
-   - Enlaces subrayados (no se distinguen solo por color), punto 2.1
-   - Sin animaciones ni movimiento, punto 7.3
-   - Foco del teclado visible, punto 9
-   ======================================================= */
+/* Estilos del sitio de Santiago Cañaz
+   Actividad 5: todo en em y % (nada en px) y colores con buen contraste */
 
 /* --- Reset básico --- */
 * {
