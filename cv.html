@@ -4,15 +4,19 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Santiago Cañaz - Curriculum Vitae</title>
   <meta name="description" content="Curriculum Vitae de Santiago Cañaz: educación, cursos, habilidades técnicas y blandas." />
+  <meta name="keywords" content="Santiago Cañaz, curriculum vitae, educación, cursos, habilidades" />
   <meta name="author" content="Santiago Cañaz" />
   <link rel="icon" type="image/svg+xml" href="images/avatar.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="start" href="index.html" title="Inicio" />
+  <link rel="contents" href="mapa.html" title="Mapa del sitio" />
   <link rel="stylesheet" type="text/css" href="css/estilos.css" />
 </head>
 
 <body>
+
+  <div id="saltar">
+    <a href="#contenido">Saltar al contenido principal</a>
+  </div>
 
   <div id="contenedor">
 
@@ -22,9 +26,10 @@
     </div>
 
     <div id="menu">
+      <h2 class="oculto">Menú de navegación</h2>
       <ul>
         <li><a href="index.html">Inicio</a></li>
-        <li><a class="activo" href="cv.html">CV</a></li>
+        <li><a class="activo" href="cv.html" title="CV (página actual)"><abbr title="Curriculum Vitae">CV</abbr></a></li>
         <li><a href="hobbies.html">Hobbies</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
@@ -32,54 +37,62 @@
 
     <div id="contenido">
 
-      <h2>Curriculum Vitae</h2>
+      <h2 class="primero">Curriculum Vitae</h2>
 
       <h3>Educación</h3>
       <div class="tabla-contenedor">
-        <table summary="Tabla con la formación académica de Santiago Cañaz">
+        <table summary="Formación académica de Santiago Cañaz. Cada fila es un estudio, con la institución y el período en que lo cursó.">
           <caption>Formación académica</caption>
-          <tr>
-            <th scope="col">Estudio</th>
-            <th scope="col">Institución</th>
-            <th scope="col">Período</th>
-          </tr>
-          <tr>
-            <td>Licenciatura en Sistemas (cursando 4to año). Título intermedio obtenido: Analista en Sistemas (2025)</td>
-            <td>Universidad CAECE</td>
-            <td>2023 - actualidad</td>
-          </tr>
-          <tr>
-            <td>Nivel inicial y secundario</td>
-            <td>Colegio Nuestra Señora de Monte Grande</td>
-            <td>2008 - 2022</td>
-          </tr>
+          <thead>
+            <tr>
+              <th scope="col" id="est">Estudio</th>
+              <th scope="col" id="inst">Institución</th>
+              <th scope="col" id="per">Período</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td headers="est">Licenciatura en Sistemas (cursando 4to año). Título intermedio obtenido: Analista en Sistemas (2025)</td>
+              <td headers="inst">Universidad CAECE</td>
+              <td headers="per">2023 - actualidad</td>
+            </tr>
+            <tr>
+              <td headers="est">Nivel inicial y secundario</td>
+              <td headers="inst">Colegio Nuestra Señora de Monte Grande</td>
+              <td headers="per">2008 - 2022</td>
+            </tr>
+          </tbody>
         </table>
       </div>
 
       <h3>Cursos y certificaciones</h3>
       <div class="tabla-contenedor">
-        <table summary="Tabla con los cursos y certificaciones realizados por Santiago Cañaz">
+        <table summary="Cursos y certificaciones de Santiago Cañaz. Cada fila es un curso, con la plataforma donde se hizo y el año.">
           <caption>Cursos</caption>
-          <tr>
-            <th scope="col">Curso</th>
-            <th scope="col">Plataforma</th>
-            <th scope="col">Año</th>
-          </tr>
-          <tr>
-            <td>n8n: Crea Agentes de IA sin Código con Make y Zapier</td>
-            <td>Udemy</td>
-            <td>2026</td>
-          </tr>
-          <tr>
-            <td>Curso Completo de Claude Code: Crea Aplicaciones con IA</td>
-            <td>Udemy</td>
-            <td>2026</td>
-          </tr>
-          <tr>
-            <td>Inteligencia Artificial avanzado</td>
-            <td>Big School</td>
-            <td>2025</td>
-          </tr>
+          <thead>
+            <tr>
+              <th scope="col" id="cur">Curso</th>
+              <th scope="col" id="plat">Plataforma</th>
+              <th scope="col" id="anio">Año</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td headers="cur">n8n: Crea Agentes de IA sin Código con Make y Zapier</td>
+              <td headers="plat">Udemy</td>
+              <td headers="anio">2026</td>
+            </tr>
+            <tr>
+              <td headers="cur">Curso Completo de Claude Code: Crea Aplicaciones con IA</td>
+              <td headers="plat">Udemy</td>
+              <td headers="anio">2026</td>
+            </tr>
+            <tr>
+              <td headers="cur">Inteligencia Artificial avanzado</td>
+              <td headers="plat">Big School</td>
+              <td headers="anio">2025</td>
+            </tr>
+          </tbody>
         </table>
       </div>
 
@@ -87,10 +100,10 @@
       <ul>
         <li>n8n (automatización de flujos de trabajo)</li>
         <li>JavaScript</li>
-        <li>CSS</li>
-        <li>HTML</li>
-        <li>C</li>
-        <li>C++</li>
+        <li><abbr title="Cascading Style Sheets" lang="en" xml:lang="en">CSS</abbr></li>
+        <li><abbr title="HyperText Markup Language" lang="en" xml:lang="en">HTML</abbr></li>
+        <li>Lenguaje C</li>
+        <li>Lenguaje C++</li>
       </ul>
 
       <h3>Habilidades blandas</h3>
@@ -104,12 +117,17 @@
         <li>Resolución de problemas</li>
       </ul>
 
-      <a class="boton" href="contacto.html">Contactame</a>
+      <p><a class="boton" href="contacto.html">Ir a la página de contacto</a></p>
 
     </div>
 
     <div id="pie">
-      <p>&copy; 2026 Santiago Cañaz. Sitio desarrollado con HTML y CSS.</p>
+      <p>&copy; 2026 Santiago Cañaz. Sitio desarrollado con <abbr title="HyperText Markup Language" lang="en" xml:lang="en">HTML</abbr> y <abbr title="Cascading Style Sheets" lang="en" xml:lang="en">CSS</abbr>.</p>
+      <p>
+        <a href="mapa.html">Mapa del sitio</a> |
+        Este sitio cumple el
+        <a href="https://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en" title="Explicación del nivel AA de conformidad (sitio del W3C, en inglés)">nivel AA de las Pautas de Accesibilidad WCAG 1.0</a>
+      </p>
     </div>
 
   </div>
