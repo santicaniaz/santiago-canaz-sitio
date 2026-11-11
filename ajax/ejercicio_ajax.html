@@ -1,21 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="ajax.css">
-
-
-<title>Ejercicio de AJAX</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Ejercicio de AJAX - Santiago Cañaz</title>
+  <meta name="description" content="Ejercicio de AJAX de la materia Arquitectura Web: muestra el contenido, los estados, el código y las cabeceras HTTP de una petición." />
+  <meta name="author" content="Santiago Cañaz" />
+  <link rel="start" href="../index.html" title="Inicio del sitio" />
+  <link rel="stylesheet" type="text/css" href="ajax.css" />
 </head>
 
 <body>
 
-	<h1>Ejercicio de AJAX</h1>
+  <p id="volver"><a href="../index.html">Volver al sitio de Santiago Cañaz</a></p>
 
-<form action="#">
-    <label>URL:</label>
-    <input type="text" id="recurso" size="70" />
-    <input type="button" id="enviar" value="Mostrar contenidos" />
+  <h1>Ejercicio de AJAX</h1>
+
+  <noscript>
+    <p class="aviso">Este ejercicio necesita JavaScript para hacer la petición AJAX. Si lo tenés desactivado, activalo en tu navegador para poder probarlo.</p>
+  </noscript>
+
+  <form action="#">
+    <p>
+      <label for="recurso">URL del archivo a pedir:</label>
+      <input type="text" id="recurso" name="recurso" size="70" value="" />
+      <input type="submit" id="enviar" value="Mostrar contenidos" />
+    </p>
   </form>
 
   <div id="principal">
@@ -35,24 +44,14 @@
   </div>
 
   <script type="text/javascript">
-    // ---------------------------------------------------------------
-    // Ejercicio de AJAX
-    // Crea la petición, muestra en todo momento el estado en el que
-    // se encuentra, y al finalizar completa los 4 campos pedidos:
-    // contenidos, estados, código de estado y cabeceras HTTP.
-    // ---------------------------------------------------------------
-
-    // Crea un objeto XMLHttpRequest compatible con distintos navegadores
-    // (incluye el método antiguo de Internet Explorer con ActiveX, tal
-    // como se enseña en la técnica AJAX clásica).
+  //<![CDATA[
+    // Crea el objeto XMLHttpRequest (con ActiveX para IE viejo)
     function crearXHR() {
       var xhrObj = null;
 
       if (window.XMLHttpRequest) {
-        // Navegadores actuales (Chrome, Firefox, Edge, Safari, IE7+)
         xhrObj = new XMLHttpRequest();
       } else if (window.ActiveXObject) {
-        // Versiones muy antiguas de Internet Explorer
         try {
           xhrObj = new ActiveXObject("Msxml2.XMLHTTP");
         } catch (error) {
@@ -67,7 +66,7 @@
       return xhrObj;
     }
 
-    // Texto descriptivo de cada valor posible de xhr.readyState
+    // Texto para cada valor de readyState
     var textoEstados = {
       0: "0 - UNSENT (petición no inicializada)",
       1: "1 - OPENED (conexión establecida con el servidor)",
@@ -78,7 +77,6 @@
 
     var xhr = null;
 
-    // Limpia los 4 campos antes de lanzar una nueva petición
     function limpiarCampos() {
       document.getElementById("contenidos").innerHTML = "";
       document.getElementById("estados").innerHTML = "";
@@ -86,38 +84,29 @@
       document.getElementById("codigo").innerHTML = "";
     }
 
-    // Convierte el texto recibido del servidor a texto plano seguro,
-    // para que se vea como código fuente y no se interprete como HTML
-    // (el CSS ya se encarga de mostrarlo con white-space: pre).
+    // Para que la respuesta se vea como texto y no se interprete como HTML
     function escaparHtml(texto) {
       var contenedorTemporal = document.createElement("div");
       contenedorTemporal.appendChild(document.createTextNode(texto));
       return contenedorTemporal.innerHTML;
     }
 
-    // Se ejecuta cada vez que cambia xhr.readyState
     function mostrarEstadoPeticion() {
       var estadoActual = textoEstados[xhr.readyState];
       if (estadoActual === undefined) {
         estadoActual = String(xhr.readyState);
       }
 
-      // "Se debe mostrar en todo momento el estado" -> se va agregando
-      // cada cambio de estado, no se pisa el anterior.
+      // Voy agregando cada estado, sin borrar los anteriores
       document.getElementById("estados").innerHTML += estadoActual + "\n";
 
-      // readyState 4 = DONE: la petición terminó y ya hay respuesta
       if (xhr.readyState === 4) {
-
         if (xhr.status === 0) {
-          // status 0 = no llegó a haber respuesta del servidor (recurso
-          // bloqueado por CORS, servidor caído, URL inválida, etc.)
+          // No hubo respuesta (servidor caído, URL mal escrita, etc.)
           document.getElementById("contenidos").innerHTML = "No se pudo contactar al servidor. Revisá la URL.";
           document.getElementById("codigo").innerHTML = "Sin respuesta del servidor";
         } else {
-          // Se muestran contenido y cabeceras para CUALQUIER respuesta del
-          // servidor, sea 200 OK, 404 Not Found, 500, etc. (el servidor sí
-          // respondió, solo que con un código distinto de éxito).
+          // Muestro todo para cualquier respuesta (200, 404, 500...)
           document.getElementById("contenidos").innerHTML = escaparHtml(xhr.responseText);
           document.getElementById("cabeceras").innerHTML = escaparHtml(xhr.getAllResponseHeaders());
           document.getElementById("codigo").innerHTML = xhr.status + " " + xhr.statusText;
@@ -125,13 +114,11 @@
       }
     }
 
-    // Se ejecuta al hacer click en el botón "Mostrar contenidos" (o al
-    // presionar Enter en el campo de texto, ver más abajo)
     function pedirRecurso() {
       var url = document.getElementById("recurso").value;
 
       if (!url) {
-        alert("Ingresá una URL antes de continuar.");
+        document.getElementById("contenidos").innerHTML = "Ingresá una URL antes de continuar.";
         return;
       }
 
@@ -140,12 +127,11 @@
       xhr = crearXHR();
 
       if (!xhr) {
-        alert("Tu navegador no soporta AJAX (XMLHttpRequest).");
+        document.getElementById("contenidos").innerHTML = "Tu navegador no soporta AJAX (XMLHttpRequest).";
         return;
       }
 
-      // Se agrega un parámetro aleatorio para evitar que el navegador
-      // devuelva una copia en caché en vez de pedirla de nuevo al servidor.
+      // Parámetro con la hora para que el navegador no use la caché
       var urlSinCache = url + (url.indexOf("?") === -1 ? "?" : "&") + "_=" + new Date().getTime();
 
       xhr.onreadystatechange = mostrarEstadoPeticion;
@@ -158,19 +144,17 @@
       }
     }
 
-    // Al cargar la página, se precarga el campo URL con la dirección de la
-    // propia página, para que se pueda probar el ejercicio con un solo click.
+    // Cargo la URL de la propia página para probar más rápido
     window.onload = function () {
       document.getElementById("recurso").value = window.location.href;
     };
 
-    document.getElementById("enviar").onclick = pedirRecurso;
-
-    // Enter dentro del campo de texto también dispara la petición
-    document.querySelector("form").onsubmit = function () {
+    // El botón es de tipo submit, así funciona con el mouse, con Enter o con el teclado
+    document.getElementsByTagName("form")[0].onsubmit = function () {
       pedirRecurso();
       return false;
     };
+  //]]>
   </script>
 
 </body>
