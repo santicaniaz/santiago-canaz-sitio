@@ -69,18 +69,27 @@ label {
   width: 25%;
 }
 
-#contenidos, #estados, #cabeceras, #codigo {
+#contenidos, #estados, #cabeceras, #codigo, .resultado {
   border: 0.15em solid #cccccc;
   color: #222222;
   background-color: #fafafa;
   padding: 1em;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
+/* Sin scroll interno: el contenido se ve entero y se recorre con el scroll de la página */
 #contenidos {
   min-height: 30em;
-  max-height: 45em;
-  overflow: scroll;
+}
+
+ol.resultado {
+  white-space: normal;
+  padding-left: 2.5em;
+}
+
+pre.resultado {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1em;
 }
 
 #estados { min-height: 15em; }

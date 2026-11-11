@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Ejercicio de AJAX (versión sin JavaScript) - Santiago Cañaz</title>
+  <meta name="description" content="Versión sin JavaScript del ejercicio de AJAX: muestra el resultado de una petición al archivo de prueba." />
+  <meta name="author" content="Santiago Cañaz" />
+  <link rel="start" href="../index.html" title="Inicio del sitio" />
+  <link rel="alternate" href="ejercicio_ajax.html" title="Versión con JavaScript" />
+  <link rel="stylesheet" type="text/css" href="ajax.css" />
+</head>
+
+<body>
+
+  <div id="saltar">
+    <a href="#contenido">Saltar al contenido principal</a>
+  </div>
+
+  <p id="volver">
+    <a href="../index.html">Volver al sitio de Santiago Cañaz</a> |
+    <a href="ejercicio_ajax.html">Ir a la versión con JavaScript</a>
+  </p>
+
+  <div id="contenido">
+
+    <h1>Ejercicio de AJAX (versión sin JavaScript)</h1>
+
+    <p>
+      El ejercicio original hace una petición AJAX al archivo que se escribe en el campo URL y
+      muestra el contenido, los estados de la petición, el código de estado y las cabeceras HTTP.
+      Como eso necesita JavaScript, en esta página está el mismo resultado ya cargado, para la
+      petición al archivo <a href="recurso_prueba.txt">recurso_prueba.txt</a> (el enlace abre el
+      archivo directamente, sin JavaScript).
+    </p>
+
+    <h2>Contenidos del archivo:</h2>
+    <pre class="resultado">Este es un archivo de prueba para el ejercicio de AJAX.
+Si ves este texto dentro del recuadro "Contenidos del archivo",
+la petición AJAX funcionó correctamente.
+
+Podés probar también con ejercicio_ajax.html como URL,
+para ver cómo trae su propio código fuente.</pre>
+
+    <h2>Estados de la petición:</h2>
+    <ol class="resultado">
+      <li>OPENED (conexión establecida con el servidor)</li>
+      <li>HEADERS_RECEIVED (cabeceras de la respuesta recibidas)</li>
+      <li>LOADING (descargando la respuesta)</li>
+      <li>DONE (petición finalizada)</li>
+    </ol>
+
+    <h2>Código de estado:</h2>
+    <p class="resultado">200 OK</p>
+
+    <h2>Cabeceras HTTP de la respuesta del servidor:</h2>
+    <pre class="resultado">accept-ranges: bytes
+access-control-allow-origin: *
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 211
+content-type: text/plain; charset=utf-8
+date: Wed, 11 Nov 2026 20:50:08 GMT
+last-modified: Wed, 11 Nov 2026 19:20:55 GMT
+server: GitHub.com
+vary: Accept-Encoding
+via: 1.1 varnish
+x-cache: HIT</pre>
+
+    <h2>Si el archivo no existe</h2>
+    <p>
+      Si se pide un archivo que no está en el servidor, por ejemplo no-existe.txt, la petición
+      pasa por los mismos cuatro estados pero el código de estado es <strong>404 Not Found</strong>,
+      y en el recuadro de contenidos aparece la página de error que devuelve el servidor.
+    </p>
+
+  </div>
+
+</body>
+</html>
